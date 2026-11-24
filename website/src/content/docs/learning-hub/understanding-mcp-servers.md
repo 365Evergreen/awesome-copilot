@@ -70,6 +70,8 @@ MCP servers are configured per-workspace. GitHub Copilot CLI discovers server de
 | `.vscode/mcp.json` | VS Code workspace | VS Code–compatible workspace config |
 | `devcontainer.json` | Dev container | Available when running inside a container |
 
+Workspace `.mcp.json` and `.github/mcp.json` files may contain comments and trailing commas.
+
 > **Security**: Workspace MCP servers are loaded **only after folder trust is confirmed**. If you haven't explicitly trusted a folder, servers defined in its config files won't start — protecting you from malicious MCP server configurations in untrusted repositories.
 
 Example `.mcp.json` or `.vscode/mcp.json`:
@@ -320,6 +322,10 @@ For example, a PostgreSQL server that can't connect because `DATABASE_URL` is no
 You can also open the `/mcp` manager while the agent is working to toggle servers on or off mid-turn. Add, edit, delete, and re-auth actions wait until the turn finishes, but enabling or disabling a server takes effect immediately.
 
 **Toggling servers on and off**: From the `/mcp` list view, you can **enable or disable individual MCP servers** without editing your config file. Select a server in the list and toggle it — disabled servers won't start in future sessions and their tools won't be available to agents. This is useful for temporarily disabling a server that's causing slowdowns or errors without removing it from your configuration entirely.
+
+**Duplicate plugin and standalone servers**: If a plugin and a standalone MCP server connect to the same endpoint, Copilot CLI warns you and shows how to disable one in `/mcp`, so you don't load the same tools twice.
+
+**Startup summary and sign-in**: When servers need attention, Copilot CLI summarizes their status at startup. Run `/mcp auth <name>` to complete sign-in for a server; the browser opens only after you do. Sign-in prompts for organization-managed servers (other than Connectors) are flagged in the startup summary rather than as individual warnings.
 
 **Common causes and fixes**:
 
