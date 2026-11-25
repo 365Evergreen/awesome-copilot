@@ -939,6 +939,14 @@ Run `/config` to open a dedicated sidebar configuration screen inside the CLI, g
 
 `/sandbox` can keep sandboxing enabled for the current session only, without changing your global setting. Sandboxed commands can use `HTTPS_PROXY` and `HTTP_PROXY` for host-rule traffic when no sandbox proxy is configured, and sandboxed git on github.com can use a `GITHUB_TOKEN` supplied through `credentials.envVars`. When sandboxed commands inherit your host proxy settings, `NO_PROXY` and `ALL_PROXY` are honored too.
 
+### Setting Environment Variables for Copilot Processes
+
+The `env` setting defines environment variables for every process Copilot starts — shell commands, local LSP and MCP servers, hooks, and extensions — whether or not the sandbox is enabled. Use it to provide consistent values (for example, a proxy or a tool's config path) without exporting them in every shell profile.
+
+### Duplicate MCP Endpoint Warning
+
+If a plugin and a standalone MCP server connect to the same endpoint, Copilot CLI warns you and shows how to disable one of them in `/mcp`, so tools aren't registered twice.
+
 ### Assisted Permissions Guidance
 
 Assisted Permissions are available without enabling experimental mode. In Assisted permission mode, the `assistedApprovalInstructions` setting lets you supply your own guidance to the permission judge, so confirmation decisions reflect your team's norms (for example, which commands are always safe to run).
